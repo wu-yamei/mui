@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>test</title>
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+	<!-- 	<style type="text/css">
+			.mui-dtpicker-title{/* 顶部年月日 */
+				display: none;
+			}
+			.mui-dtpicker-header,.mui-poppicker-header{/* 按钮部分 */
+				background: #f4f4f4;
+				text-align: center;
+			}
+			.mui-poppicker-header button:first-child{
+				color: #222;
+			}
+			.mui-dtpicker-header button:first-child{
+				float: left;
+				color: #222;
+			}
+			.mui-dtpicker-header > button,.mui-poppicker-header > button{
+				border: none;
+				background: none;
+				color: #b39851;
+			}
+			.mui-picker{/* 日期部分 */
+				background: #fff;
+			}
+			.switch{
+				display: inline-block;
+				width: 30%;
+				margin: 0 auto;
+			}
+			.switch > span{
+				display: inline-block;
+				width: 50%;
+				border: 1px solid #b39851;
+				text-align: center;
+				color: #fff;
+				background: #b39851;
+				/*font-size: 1rem;*/
+			}
+			.switch > span:first-child{
+				border-radius: .2rem 0 0 .2rem;
+			}
+			.switch > span:last-child{
+				border-radius: 0 .2rem .2rem 0;
+			}
+			.switch > span.active{
+				background: #fff;
+				color: #b39851;
+			}
+		</style> -->
+	</head>
+	<body>
+		<button id='bir' class="btn mui-btn mui-btn-block">选择日期</button>
+		<button id='hei' class="btn mui-btn mui-btn-block">选择身高</button>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/calendar_covert.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/test1.js"></script>
+		<script>
+			//修改生日
+			(function($) {
+				$.init();
+				var result = document.getElementById('bir');
+				result.addEventListener('tap', function() {
+					var options = {
+						"type":"date",
+						"beginYear": new Date().getFullYear() - 100,
+						"endYear": new Date().getFullYear()
+					};
+					var id = this.getAttribute('id');
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						result.innerText = '' + rs.text;
+						picker.dispose();
+					});
+				}, false);
+			})(mui);
+
+			//修改身高
+			(function($, doc) {
+				$.init();
+				$.ready(function() {
+					var heiPicker = new $.PopPicker();
+					heiPicker.setData([{
+						value: '145',
+						text: '145cm'
+					}, {
+						value: '150',
+						text: '150cm'
+					}, {
+						value: '155',
+						text: '155cm'
+					}, {
+						value: '160',
+						text: '160cm'
+					}, {
+						value: '165',
+						text: '165cm'
+					}, {
+						value: '170',
+						text: '170cm'
+					}, {
+						value: '175',
+						text: '175cm'
+					}, {
+						value: '180',
+						text: '180cm'
+					}, {
+						value: '185',
+						text: '185cm'
+					}, {
+						value: '190', 
+						text: '190cm'
+					}]);
+					var userHei = doc.getElementById('hei');
+					userHei.addEventListener('tap', function(event) {
+						heiPicker.show(function(items) {
+							userHei.innerText = items[0].text;
+							//返回 false 可以阻止选择框的关闭
+							// return false;
+						});
+					}, false);
+				});
+			})(mui, document);
+			
+		</script>
+	</body>
+
+</html>
